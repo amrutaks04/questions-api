@@ -15,7 +15,7 @@ async function connectToDb() {
     console.log('DB Connection established')
     const port=process.env.PORT || 8002 // in cloud service take any port no which is avaliable(process.env.PORT) , in local machine it will take 8002 as port number
     app.listen(port,function(){
-        console.log(Listening on port ${port} )
+        console.log(`Listening on port ${port} `)
     })
   }catch(error){
     console.log(error)
