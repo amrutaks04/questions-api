@@ -65,27 +65,27 @@ app.get('/req-questions', async function(request, response) {
   }
 });
 
-// Checking answers
+//checking answers
 app.post('/check-answer', async function(request, response) {
-  try {
-    const { questionId, selectedAnswer } = request.body;
-    // Retrieve the question from the database by its ID
-    const question = await Question.findById(questionId);
-    if (!question) {
-      return response.status(404).json({
-        status: 'failure',
-        message: 'Question not found'
-      });
+    try {
+        const { questionId, selectedAnswer } = request.body;
+        // Retrieve the question from the database by its ID
+        const question = await Question.findById(questionId);
+        if (!question) {
+            return response.status(404).json({
+                status: 'failure',
+                message: 'Question not found'
+            });
+        }
+        // Compare the selected answer with the correct answer
+        const result = selectedAnswer === question.correctAnswer ? 'Correct' : 'Incorrect';
+        response.status(200).json({ result });
+    } catch (error) {
+        console.error('Error checking answer:', error);
+        response.status(500).json({
+            status: 'failure',
+            message: 'Failed to check answer',
+            error: error.message
+        });
     }
-    // Compare the selected answer with the correct answer
-    const result = selectedAnswer === question.correctAnswer ? 'Correct' : 'Incorrect';
-    response.status(200).json({ result });
-  } catch (error) {
-    console.error('Error checking answer:', error);
-    response.status(500).json({
-      status: 'failure',
-      message: 'Failed to check answer',
-      error: error.message
-    });
-  }
 });
