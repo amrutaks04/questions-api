@@ -89,3 +89,29 @@ app.post('/check-answer', async function(request, response) {
         });
     }
 });
+
+
+// Example endpoint for querying a question by its ID
+app.get('/get-question/:questionId', async function(request, response) {
+    try {
+      const { questionId } = request.params;
+      // Query the database for the question with the provided questionId
+      const question = await Question.findById(questionId);
+      if (!question) {
+        return response.status(404).json({
+          status: 'failure',
+          message: 'Question not found'
+        });
+      }
+      // Return the retrieved question document
+      response.status(200).json(question);
+    } catch (error) {
+      console.error('Error fetching question:', error);
+      response.status(500).json({
+        status: 'failure',
+        message: 'Failed to fetch question',
+        error: error.message
+      });
+    }
+  });
+  
