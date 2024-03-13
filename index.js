@@ -66,4 +66,21 @@ app.get('/req-questions', async function(request, response) {
       });
     }
   });
+
+  app.post('/check-answer', async function(request, response) {
+    try {
+        const { selectedAnswer, correctAnswer } = request.body;
+        // Compare the selected answer with the correct answer
+        const result = selectedAnswer === correctAnswer ? 'Correct' : 'Incorrect';
+        response.status(200).json({ result });
+    } catch (error) {
+        console.error('Error checking answer:', error);
+        response.status(500).json({
+            status: 'failure',
+            message: 'Failed to check answer',
+            error: error.message
+        });
+    }
+});
+
   
