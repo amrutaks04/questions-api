@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-  topic:{
-    type:String,
-    required:true
-  },
+  // topic:{
+  //   type:String,
+  //   required:true
+  // },
   text: {
     type: String,
     required: true

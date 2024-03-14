@@ -30,7 +30,7 @@ connectToDb()
 app.post('/add-ori-ques', async function (request, response) {
     try {
         const newUser = await Question.create({
-            topic: request.body.topic,
+            // topic: request.body.topic,
             text: request.body.text,
             difficulty: request.body.difficulty,
             options: request.body.options,
