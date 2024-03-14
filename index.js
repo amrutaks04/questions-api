@@ -71,10 +71,10 @@ app.get('/req-questions', async function (request, response) {
 //checking answers
 app.post('/check-answer', async function (request, response) {
     try {
-        const { selectedAnswers,
+        const { selectedAnswer,
             correctAnswer } = request.body;
-        // Compare the selected answer with the correct answer
-        const result = selectedAnswers === correctAnswer ? 'Correct' : 'Incorrect';
+        
+        const result = selectedAnswer=== correctAnswer ? 'Correct' : 'Incorrect';
         response.status(200).json({ result });
     } catch (error) {
         console.error('Error checking answer:', error);
